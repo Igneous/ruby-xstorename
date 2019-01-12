@@ -15,22 +15,19 @@ int set_xname(VALUE _self, VALUE msg)
 
   if(!(dpy=XOpenDisplay(NULL))) {
     rb_raise(rb_eRuntimeError, "ERROR: could not open X11 display.");
-
   }
 
-	scr = DefaultScreen(dpy);
-	rootwin = RootWindow(dpy, scr);
+  scr = DefaultScreen(dpy);
+  rootwin = RootWindow(dpy, scr);
 
-	XStoreName(dpy, rootwin, StringValueCStr(msg));
+  XStoreName(dpy, rootwin, StringValueCStr(msg));
 
-	XCloseDisplay(dpy);
+  XCloseDisplay(dpy);
 
-	return result;
+  return result;
 }
 
 void Init_XStoreName() {
-
-
     VALUE mod = rb_define_module("XStoreName");
     rb_define_module_function(mod, "set_xname", set_xname, 1);
 }
